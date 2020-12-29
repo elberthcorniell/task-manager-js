@@ -74,14 +74,30 @@ export const setTab = (newTab) => {
 export const getState = () => state;
 
 export const getTab = () => {
-  const url = new URL(window.location.href);
-  const group = url.searchParams.get("group");
+  const group = getActiveGroup();
   handleChange({ target: { value: group, id: 'group' } });
   if (tab) return tab;
   if (group) return 2;
   return 1;
 };
 
+export const getActiveGroup = () => {
+  const url = new URL(window.location.href);
+  const group = url.searchParams.get("group");
+  return group;
+}
+
 export const getAllGroups = () => JSON.parse(localStorage.getItem('groups') || "[]");
 
-export const getAllTasks = () => JSON.parse(localStorage.getItem('groups') || "{}");
+export const getAllTasks = () => JSON.parse(localStorage.getItem('tasks') || "{}");
+
+export const formatDate = (date) => {
+  date = new Date(date);
+  var monthNames = [
+    "Jan", "Feb", "Mar",
+    "Apr", "May", "Jun", "Jul",
+    "Aug", "Sep", "Oct",
+    "Nov", "Dec"
+  ];
+  return `${date.getDate()} ${monthNames[date.getMonth()]}, ${date.getFullYear()}`;
+}

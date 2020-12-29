@@ -1,7 +1,8 @@
-import { getAllTasks } from '../utils'
+import { getActiveGroup, getAllTasks } from '../utils'
+import Checklist from './Checklist'
 
 export default class Task {
-  constructor({ title, description, dueDate, priority, group }) {
+  constructor({ title, description, dueDate, priority, group = getActiveGroup() }) {
     this.title = String(title);
     this.description = String(description);
     this.dueDate = new Date(dueDate);

@@ -1,4 +1,4 @@
-import { createElement, getAllGroups, createModal, getState, getAllTasks } from '../utils';
+import { createElement, getAllGroups, createModal, getState, getAllTasks, formatDate } from '../utils';
 
 const Tasks = () => {
   const container = createElement('div', 'home');
@@ -14,7 +14,7 @@ const Tasks = () => {
     return true;
   });
 
-  form.id = 'newGroupForm';
+  form.id = 'newTaskForm';
 
   const newGroup = createModal({ callToAction: 'New Task', id: 'newTask', modalBody: form.outerHTML });
   const row = createElement('div', 'row');
@@ -25,6 +25,8 @@ const Tasks = () => {
     cardBody.innerHTML = `
       <strong>${item.title}</strong>
       <p>${item.description || ''}</p>
+      <strong>Due date: ${formatDate(item.dueDate) || ''}</strong><br>
+      <strong>Priority: ${item.priority || ''}</strong><br>
       <a href="?group=${item.title}"><strong>View group</strong></a>`;
     const card = createElement('div', 'card', cardBody.outerHTML);
     const listItem = createElement('div', 'col-3', card.outerHTML);
