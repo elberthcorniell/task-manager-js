@@ -4,16 +4,16 @@ h1 {
 }
 
 button {
-  width: 50px;
   display: inline;
+  margin: 20px 10px 20px 0;
+}
+
+a {
+  margin-right: 10px;
 }
 
 nav {
   height: 50px;
-}
-
-form {
-  width: 400px;
 }
 
 input {
@@ -25,6 +25,7 @@ input {
   border: none;
   border-radius: 5px;
   font-weight: bold;
+  background-color: #f3f5f7;
 }
 
 input[type=submit] {
