@@ -9,7 +9,7 @@ const Home = () => {
     const input = createElement('input', undefined, item);
     input.type = item;
     input.placeholder = item;
-    input.id = `${item}GroupField`
+    input.id = `${item}GroupField`;
     form.appendChild(input);
     return true;
   });
@@ -25,7 +25,7 @@ const Home = () => {
     cardBody.innerHTML = `
       <strong>${item.title}</strong>
       <p>${item.description || ''}</p>
-      <a href="?group=${item.title}"><strong>View group</strong></a>`;
+      <a href='?group=${item.title}'><strong>View group</strong></a>`;
     const card = createElement('div', 'card', cardBody.outerHTML);
     const listItem = createElement('div', 'col-3', card.outerHTML);
     row.appendChild(listItem);

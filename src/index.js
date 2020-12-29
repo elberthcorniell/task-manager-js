@@ -1,6 +1,12 @@
 import { Group, Task } from './js/task';
 import mountTab from './js/layout';
-import { handleChange, getState, getTab, getParam, b64_to_utf8, getAllTasks } from './js/utils';
+import {
+  handleChange,
+  getState,
+  getTab,
+  getParam,
+  b64ToUtf8,
+} from './js/utils';
 
 mountTab();
 
@@ -8,7 +14,7 @@ switch (getTab()) {
   case 1:
   default:
     const newGroup = document.getElementById('newGroupForm');
-    const { childNodes: groupFields } = newGroup
+    const { childNodes: groupFields } = newGroup;
     for (const i in groupFields) {
       groupFields[i].localName == 'input' && groupFields[i].addEventListener('input', handleChange);
     }
@@ -18,20 +24,19 @@ switch (getTab()) {
       const { TitleGroupField: title, DescriptionGroupField: description } = getState();
       const group = new Group({ title, description });
       group.save();
-      window.location.reload()
+      window.location.reload();
     })
     break;
 
   case 2:
     const newTask = document.getElementById('newTaskForm');
-    const { childNodes: taskFields } = newTask
+    const { childNodes: taskFields } = newTask;
     for (const i in taskFields) {
       taskFields[i].localName == 'input' && taskFields[i].addEventListener('input', handleChange);
     }
 
     newTask.addEventListener('submit', (e) => {
       e.preventDefault();
-      console.log('lok')
       const {
         TitleTaskField: title,
         DescriptionTaskField: description,
@@ -51,7 +56,7 @@ if (localStorage.getItem('groups') === null) {
 }
 
 if (getParam('delete')) {
-  const item = JSON.parse(b64_to_utf8(getParam('delete')));
+  const item = JSON.parse(b64ToUtf8(getParam('delete')));
   const task = new Task(item);
   task.delete();
   mountTab();

@@ -1,5 +1,3 @@
-import { Task } from "./task";
-
 let tab = undefined;
 let state = {};
 
@@ -19,24 +17,24 @@ export const createElement = (tag, className = '', content = '') => {
 export const createModal = ({ callToAction, id, modalBody }) => {
   const button = createElement('button', 'btn btn-success', callToAction);
   button.type = 'button';
-  const dataToggle = document.createAttribute("data-toggle");
-  dataToggle.value = "modal";
+  const dataToggle = document.createAttribute('data-toggle');
+  dataToggle.value = 'modal';
   button.setAttributeNode(dataToggle);
-  const dataTarget = document.createAttribute("data-target");
+  const dataTarget = document.createAttribute('data-target');
   dataTarget.value = `#${id}Modal`;
   button.setAttributeNode(dataTarget);
 
   modalBody = createElement('div', 'modal-body', modalBody);
   const modalHeader = createElement('div', 'modal-header', `
-  <h5 class="modal-title" id="exampleModalLabel">${callToAction}</h5>
-  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-  <span aria-hidden="true">&times;</span>
+  <h5 class='modal-title' id='exampleModalLabel'>${callToAction}</h5>
+  <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
+  <span aria-hidden='true'>&times;</span>
   </button>
   `);
   const modalContent = createElement('div', 'modal-content');
   const modalDialog = createElement('div', 'modal-dialog');
 
-  const roleDialog = document.createAttribute("role");
+  const roleDialog = document.createAttribute('role');
   roleDialog.value = 'document';
   modalDialog.setAttributeNode(roleDialog);
 
@@ -48,19 +46,19 @@ export const createModal = ({ callToAction, id, modalBody }) => {
   const modal = createElement('div', 'modal fade', modalDialog.outerHTML);
   modal.id = `${id}Modal`;
 
-  const tabindex = document.createAttribute("tabindex");
+  const tabindex = document.createAttribute('tabindex');
   tabindex.value = '-1';
   modal.setAttributeNode(tabindex);
 
-  const role = document.createAttribute("role");
+  const role = document.createAttribute('role');
   role.value = `dialog`;
   modal.setAttributeNode(role);
 
-  const ariaLabelledby = document.createAttribute("aria-labelledby");
-  ariaLabelledby.value = "exampleModalLabel";
+  const ariaLabelledby = document.createAttribute('aria-labelledby');
+  ariaLabelledby.value = 'exampleModalLabel';
   modal.setAttributeNode(ariaLabelledby);
 
-  const ariaHidden = document.createAttribute("aria-hidden");
+  const ariaHidden = document.createAttribute('aria-hidden');
   ariaHidden.value = 'true';
   modal.setAttributeNode(ariaHidden);
 
@@ -88,21 +86,21 @@ export const getParam = (param) => {
   return url.searchParams.get(param);
 }
 
-export const getAllGroups = () => JSON.parse(localStorage.getItem('groups') || "[]");
+export const getAllGroups = () => JSON.parse(localStorage.getItem('groups') || '[]');
 
-export const getAllTasks = () => JSON.parse(localStorage.getItem('tasks') || "{}");
+export const getAllTasks = () => JSON.parse(localStorage.getItem('tasks') || '{}');
 
 export const formatDate = (date) => {
   date = new Date(date);
   var monthNames = [
-    "Jan", "Feb", "Mar",
-    "Apr", "May", "Jun", "Jul",
-    "Aug", "Sep", "Oct",
-    "Nov", "Dec"
+    'Jan', 'Feb', 'Mar',
+    'Apr', 'May', 'Jun', 'Jul',
+    'Aug', 'Sep', 'Oct',
+    'Nov', 'Dec'
   ];
   return `${date.getDate()} ${monthNames[date.getMonth()]}, ${date.getFullYear()}`;
 }
 
-export const utf8_to_b64 = (str) => window.btoa(unescape(encodeURIComponent(str)));
+export const utf8ToB64 = (str) => window.btoa(unescape(encodeURIComponent(str)));
 
-export const b64_to_utf8 = (str) => decodeURIComponent(escape(window.atob(str)));
+export const b64ToUtf8 = (str) => decodeURIComponent(escape(window.atob(str)));

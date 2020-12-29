@@ -1,5 +1,12 @@
 import { Task } from '../task';
-import { createElement, utf8_to_b64, createModal, getState, getAllTasks, formatDate, b64_to_utf8 } from '../utils';
+import {
+  createElement,
+  utf8ToB64,
+  createModal,
+  getState,
+  getAllTasks,
+  formatDate,
+} from '../utils';
 
 const Tasks = () => {
   const container = createElement('div', 'home');
@@ -32,7 +39,7 @@ const Tasks = () => {
       <p>${item.description || ''}</p>
       <strong>Due date: ${formatDate(item.dueDate) || ''}</strong><br>
       <strong>Priority: ${item.priority || ''}</strong><br>
-      <a class="btn btn-danger" href="?delete=${utf8_to_b64(taskString)}&group=${task.group}" >delete</a>`;
+      <a class='btn btn-danger' href='?delete=${utf8ToB64(taskString)}&group=${task.group}' >delete</a>`;
       cardBody.appendChild(createModal({ callToAction: 'View Task', id: `task${item.title}${index}`, modalBody: cardBody.innerHTML }))
       const card = createElement('div', 'card', cardBody.outerHTML);
       const listItem = createElement('div', 'col-3', card.outerHTML);
