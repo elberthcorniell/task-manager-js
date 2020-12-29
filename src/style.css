@@ -4,8 +4,8 @@ h1 {
 }
 
 button {
-  width: 50px;
   display: inline;
+  margin-bottom: 20px;
 }
 
 nav {
