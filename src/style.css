@@ -12,10 +12,6 @@ nav {
   height: 50px;
 }
 
-form {
-  width: 400px;
-}
-
 input {
   display: block;
   margin-top: 10px;
@@ -25,6 +21,7 @@ input {
   border: none;
   border-radius: 5px;
   font-weight: bold;
+  background-color: #f3f5f7;
 }
 
 input[type=submit] {
