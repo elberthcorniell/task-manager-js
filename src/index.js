@@ -9,10 +9,11 @@ const { childNodes: groupFields } = newGroup
 for (const i in groupFields) {
   groupFields[i].localName == 'input' && groupFields[i].addEventListener('input', handleChange);
 }
+
 newGroup.addEventListener('submit', (e) => {
   e.preventDefault();
   const { TitleGroupField: title, DescriptionGroupField: description } = getState();
   const group = new Group({ title, description });
   group.save();
-  window.location.reload()
+  window.location.reload()  
 })

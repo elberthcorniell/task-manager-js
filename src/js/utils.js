@@ -1,4 +1,4 @@
-let tab = 1;
+let tab = undefined;
 let state = {};
 
 export const handleChange = (e) => {
@@ -73,6 +73,15 @@ export const setTab = (newTab) => {
 
 export const getState = () => state;
 
-export const getTab = () => tab;
+export const getTab = () => {
+  const url = new URL(window.location.href);
+  const group = url.searchParams.get("group");
+  handleChange({ target: { value: group, id: 'group' } });
+  if (tab) return tab;
+  if (group) return 2;
+  return 1;
+};
 
 export const getAllGroups = () => JSON.parse(localStorage.getItem('groups') || "[]");
+
+export const getAllTasks = () => JSON.parse(localStorage.getItem('groups') || "{}");

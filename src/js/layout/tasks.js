@@ -1,26 +1,26 @@
-import { createElement, getAllGroups, createModal } from '../utils';
+import { createElement, getAllGroups, createModal, getState, getAllTasks } from '../utils';
 
-const Home = () => {
+const Tasks = () => {
   const container = createElement('div', 'home');
 
-  const fields = ['Title', 'Description', 'submit'];
+  const fields = ['Title', 'Description', 'date', 'priority', 'submit'];
   const form = document.createElement('form');
   fields.map(item => {
     const input = createElement('input', undefined, item);
     input.type = item;
     input.placeholder = item;
-    input.id = `${item}GroupField`
+    input.id = `${item}TaskField`
     form.appendChild(input);
     return true;
   });
 
   form.id = 'newGroupForm';
 
-  const newGroup = createModal({ callToAction: 'New Group', id: 'newGroup', modalBody: form.outerHTML });
+  const newGroup = createModal({ callToAction: 'New Task', id: 'newTask', modalBody: form.outerHTML });
   const row = createElement('div', 'row');
-  const listItems = getAllGroups();
+  const listItems = getAllTasks()[getState().group];
 
-  listItems.map(item => {
+  listItems && listItems.map(item => {
     const cardBody = createElement('div', 'card-body');
     cardBody.innerHTML = `
       <strong>${item.title}</strong>
@@ -38,4 +38,4 @@ const Home = () => {
   document.getElementById('content').appendChild(container);
 };
 
-export default Home;
+export default Tasks;

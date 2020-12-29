@@ -1,11 +1,10 @@
 import Navbar from './navbar';
 import Home from './home';
-import Menu from './menu';
-import Contact from './contact';
+import Tasks from './tasks';
 import { getTab, setTab } from '../utils';
 
 const listen = () => {
-  document.getElementById('deadline').addEventListener('click', () => { setTab(1); mountTab(); });
+  document.getElementById('groups').addEventListener('click', () => { setTab(1); mountTab(); });
   document.getElementById('tasks').addEventListener('click', () => { setTab(2); mountTab(); });
 };
 
@@ -18,10 +17,7 @@ const mountTab = () => {
       Home();
       break;
     case 2:
-      Menu();
-      break;
-    case 3:
-      Contact();
+      Tasks();
       break;
     default:
       Home();
