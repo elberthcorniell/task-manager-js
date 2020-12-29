@@ -4,7 +4,6 @@ let state = {};
 export const handleChange = (e) => {
   const { value, id } = e.target;
   state[id] = value;
-  console.log(state);
 };
 
 export const createElement = (tag, className = '', content = '') => {
@@ -72,7 +71,7 @@ export const setTab = (newTab) => {
   tab = newTab;
 };
 
-export const getState = (newTab) => state;
+export const getState = () => state;
 
 export const getTab = () => tab;
 
