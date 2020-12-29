@@ -15,6 +15,7 @@ const Home = () => {
   });
 
   form.id = 'newGroupForm';
+  form.setAttribute('action', '#');
 
   const newGroup = createModal({ callToAction: 'New Group', id: 'newGroup', modalBody: form.outerHTML });
   const row = createElement('div', 'row');

@@ -13,6 +13,7 @@ const Tasks = () => {
 
   const fields = ['Title', 'Description', 'date', 'priority', 'submit'];
   const form = document.createElement('form');
+
   fields.map(item => {
     const input = createElement('input', undefined, item);
     input.type = item;
@@ -23,6 +24,7 @@ const Tasks = () => {
   });
 
   form.id = 'newTaskForm';
+  form.setAttribute('action', '#');
 
   const newGroup = createModal({ callToAction: 'New Task', id: 'newTask', modalBody: form.outerHTML });
   const row = createElement('div', 'row');
