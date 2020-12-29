@@ -5,7 +5,11 @@ h1 {
 
 button {
   display: inline;
-  margin-bottom: 20px;
+  margin: 20px 10px 20px 0;
+}
+
+a {
+  margin-right: 10px;
 }
 
 nav {

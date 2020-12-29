@@ -1,6 +1,6 @@
-import { Group, Task, Checklist, Item } from './js/task'
-import mountTab from './js/layout'
-import { handleChange, getState, getTab } from './js/utils';
+import { Group, Task } from './js/task';
+import mountTab from './js/layout';
+import { handleChange, getState, getTab, getParam, b64_to_utf8, getAllTasks } from './js/utils';
 
 mountTab();
 
@@ -40,7 +40,19 @@ switch (getTab()) {
       } = getState();
       const task = new Task({ title, description, dueDate, priority });
       task.save();
-      window.location.reload() 
+      window.location.reload()
     })
     break;
+}
+
+if (localStorage.getItem('groups') === null) {
+  localStorage.setItem('groups', JSON.stringify([{ title: 'default', description: 'For general tasks' }]));
+  mountTab();
+}
+
+if (getParam('delete')) {
+  const item = JSON.parse(b64_to_utf8(getParam('delete')));
+  const task = new Task(item);
+  task.delete();
+  mountTab();
 }

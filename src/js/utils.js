@@ -1,3 +1,5 @@
+import { Task } from "./task";
+
 let tab = undefined;
 let state = {};
 
@@ -74,17 +76,16 @@ export const setTab = (newTab) => {
 export const getState = () => state;
 
 export const getTab = () => {
-  const group = getActiveGroup();
+  const group = getParam('group');
   handleChange({ target: { value: group, id: 'group' } });
   if (tab) return tab;
   if (group) return 2;
   return 1;
 };
 
-export const getActiveGroup = () => {
+export const getParam = (param) => {
   const url = new URL(window.location.href);
-  const group = url.searchParams.get("group");
-  return group;
+  return url.searchParams.get(param);
 }
 
 export const getAllGroups = () => JSON.parse(localStorage.getItem('groups') || "[]");
@@ -101,3 +102,7 @@ export const formatDate = (date) => {
   ];
   return `${date.getDate()} ${monthNames[date.getMonth()]}, ${date.getFullYear()}`;
 }
+
+export const utf8_to_b64 = (str) => window.btoa(unescape(encodeURIComponent(str)));
+
+export const b64_to_utf8 = (str) => decodeURIComponent(escape(window.atob(str)));

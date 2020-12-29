@@ -1,4 +1,5 @@
-import { createElement, getAllGroups, createModal, getState, getAllTasks, formatDate } from '../utils';
+import { Task } from '../task';
+import { createElement, utf8_to_b64, createModal, getState, getAllTasks, formatDate, b64_to_utf8 } from '../utils';
 
 const Tasks = () => {
   const container = createElement('div', 'home');
@@ -20,19 +21,23 @@ const Tasks = () => {
   const row = createElement('div', 'row');
   const listItems = getAllTasks()[getState().group];
 
-  listItems && listItems.map(item => {
+  if (listItems) for (const index in listItems) {
+    const item = listItems[index];
+    if (!item) continue;
+    const task = new Task(item);
+    const taskString = JSON.stringify(task.getAsObject());
     const cardBody = createElement('div', 'card-body');
     cardBody.innerHTML = `
       <strong>${item.title}</strong>
       <p>${item.description || ''}</p>
       <strong>Due date: ${formatDate(item.dueDate) || ''}</strong><br>
       <strong>Priority: ${item.priority || ''}</strong><br>
-      <a href="?group=${item.title}"><strong>View group</strong></a>`;
-    const card = createElement('div', 'card', cardBody.outerHTML);
-    const listItem = createElement('div', 'col-3', card.outerHTML);
-    row.appendChild(listItem);
-    return true;
-  });
+      <a class="btn btn-danger" href="?delete=${utf8_to_b64(taskString)}&group=${task.group}" >delete</a>`;
+      cardBody.appendChild(createModal({ callToAction: 'View Task', id: `task${item.title}${index}`, modalBody: cardBody.innerHTML }))
+      const card = createElement('div', 'card', cardBody.outerHTML);
+      const listItem = createElement('div', 'col-3', card.outerHTML);
+      row.appendChild(listItem);
+    };
 
   container.appendChild(newGroup);
   container.appendChild(row);
