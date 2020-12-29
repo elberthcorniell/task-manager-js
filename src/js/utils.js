@@ -1,5 +1,5 @@
-let tab = undefined;
-let state = {};
+let tab;
+const state = {};
 
 export const handleChange = (e) => {
   const { value, id } = e.target;
@@ -41,7 +41,7 @@ export const createModal = ({ callToAction, id, modalBody }) => {
   modalContent.appendChild(modalHeader);
   modalContent.appendChild(modalBody);
 
-  modalDialog.appendChild(modalContent)
+  modalDialog.appendChild(modalContent);
 
   const modal = createElement('div', 'modal fade', modalDialog.outerHTML);
   modal.id = `${id}Modal`;
@@ -51,7 +51,7 @@ export const createModal = ({ callToAction, id, modalBody }) => {
   modal.setAttributeNode(tabindex);
 
   const role = document.createAttribute('role');
-  role.value = `dialog`;
+  role.value = 'dialog';
   modal.setAttributeNode(role);
 
   const ariaLabelledby = document.createAttribute('aria-labelledby');
@@ -62,7 +62,7 @@ export const createModal = ({ callToAction, id, modalBody }) => {
   ariaHidden.value = 'true';
   modal.setAttributeNode(ariaHidden);
 
-  document.getElementById('content').appendChild(modal)
+  document.getElementById('content').appendChild(modal);
 
   return button;
 };
@@ -73,6 +73,11 @@ export const setTab = (newTab) => {
 
 export const getState = () => state;
 
+export const getParam = (param) => {
+  const url = new URL(window.location.href);
+  return url.searchParams.get(param);
+};
+
 export const getTab = () => {
   const group = getParam('group');
   handleChange({ target: { value: group, id: 'group' } });
@@ -81,25 +86,20 @@ export const getTab = () => {
   return 1;
 };
 
-export const getParam = (param) => {
-  const url = new URL(window.location.href);
-  return url.searchParams.get(param);
-}
-
 export const getAllGroups = () => JSON.parse(localStorage.getItem('groups') || '[]');
 
 export const getAllTasks = () => JSON.parse(localStorage.getItem('tasks') || '{}');
 
 export const formatDate = (date) => {
   date = new Date(date);
-  var monthNames = [
+  const monthNames = [
     'Jan', 'Feb', 'Mar',
     'Apr', 'May', 'Jun', 'Jul',
     'Aug', 'Sep', 'Oct',
-    'Nov', 'Dec'
+    'Nov', 'Dec',
   ];
   return `${date.getDate()} ${monthNames[date.getMonth()]}, ${date.getFullYear()}`;
-}
+};
 
 export const utf8ToB64 = (str) => window.btoa(unescape(encodeURIComponent(str)));
 

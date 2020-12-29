@@ -1,4 +1,4 @@
-import { getAllGroups } from '../utils'
+import { getAllGroups } from '../utils';
 
 export default class Group {
   constructor({ title, description }) {
@@ -6,15 +6,14 @@ export default class Group {
     this.description = String(description);
   }
 
-  save(){
+  save() {
     const groups = getAllGroups();
     groups.push(this.getAsObject());
     localStorage.setItem('groups', JSON.stringify(groups));
   }
 
-  getAsObject(){
+  getAsObject() {
     const { title, description } = this;
     return { title, description };
   }
-  
 }

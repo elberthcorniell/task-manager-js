@@ -4,7 +4,7 @@ const menu = ['Groups', 'Tasks'];
 
 const Navbar = () => {
   const nav = createElement('nav', 'nav');
-  nav.appendChild(createElement('strong', 'nav-link active', 'Deadline'))
+  nav.appendChild(createElement('strong', 'nav-link active', 'Deadline'));
   menu.map(tab => {
     const link = createElement('a', 'nav-link active', tab);
     link.href = '#';

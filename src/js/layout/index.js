@@ -26,6 +26,6 @@ const listen = () => {
 const mount = () => {
   mountTab();
   listen();
-}
+};
 
 export default mount;

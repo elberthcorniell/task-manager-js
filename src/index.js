@@ -12,11 +12,14 @@ mountTab();
 
 switch (getTab()) {
   case 1:
-  default:
+  default: {
     const newGroup = document.getElementById('newGroupForm');
     const { childNodes: groupFields } = newGroup;
-    for (const i in groupFields) {
-      groupFields[i].localName == 'input' && groupFields[i].addEventListener('input', handleChange);
+
+    for (let i = 0; i < groupFields.length; i += 1) {
+      if (groupFields[i].localName === 'input') {
+        groupFields[i].addEventListener('input', handleChange);
+      }
     }
 
     newGroup.addEventListener('submit', (e) => {
@@ -25,14 +28,16 @@ switch (getTab()) {
       const group = new Group({ title, description });
       group.save();
       window.location.reload();
-    })
+    });
     break;
-
-  case 2:
+  }
+  case 2: {
     const newTask = document.getElementById('newTaskForm');
     const { childNodes: taskFields } = newTask;
-    for (const i in taskFields) {
-      taskFields[i].localName == 'input' && taskFields[i].addEventListener('input', handleChange);
+    for (let i = 0; i < taskFields.length; i += 1) {
+      if (taskFields[i].localName === 'input') {
+        taskFields[i].addEventListener('input', handleChange);
+      }
     }
 
     newTask.addEventListener('submit', (e) => {
@@ -43,11 +48,14 @@ switch (getTab()) {
         dateTaskField: dueDate,
         priorityTaskField: priority,
       } = getState();
-      const task = new Task({ title, description, dueDate, priority });
+      const task = new Task({
+        title, description, dueDate, priority,
+      });
       task.save();
-      window.location.reload()
-    })
+      window.location.reload();
+    });
     break;
+  }
 }
 
 if (localStorage.getItem('groups') === null) {

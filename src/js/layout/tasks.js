@@ -17,7 +17,7 @@ const Tasks = () => {
     const input = createElement('input', undefined, item);
     input.type = item;
     input.placeholder = item;
-    input.id = `${item}TaskField`
+    input.id = `${item}TaskField`;
     form.appendChild(input);
     return true;
   });
@@ -28,23 +28,26 @@ const Tasks = () => {
   const row = createElement('div', 'row');
   const listItems = getAllTasks()[getState().group];
 
-  if (listItems) for (const index in listItems) {
-    const item = listItems[index];
-    if (!item) continue;
-    const task = new Task(item);
-    const taskString = JSON.stringify(task.getAsObject());
-    const cardBody = createElement('div', 'card-body');
-    cardBody.innerHTML = `
-      <strong>${item.title}</strong>
-      <p>${item.description || ''}</p>
-      <strong>Due date: ${formatDate(item.dueDate) || ''}</strong><br>
-      <strong>Priority: ${item.priority || ''}</strong><br>
-      <a class='btn btn-danger' href='?delete=${utf8ToB64(taskString)}&group=${task.group}' >delete</a>`;
-      cardBody.appendChild(createModal({ callToAction: 'View Task', id: `task${item.title}${index}`, modalBody: cardBody.innerHTML }))
-      const card = createElement('div', 'card', cardBody.outerHTML);
-      const listItem = createElement('div', 'col-3', card.outerHTML);
-      row.appendChild(listItem);
-    };
+  if (listItems) {
+    for (let index = 0; index < listItems.length; index += 1) {
+      if (listItems[index]) {
+        const item = listItems[index];
+        const task = new Task(item);
+        const taskString = JSON.stringify(task.getAsObject());
+        const cardBody = createElement('div', 'card-body');
+        cardBody.innerHTML = `
+        <strong>${item.title}</strong>
+        <p>${item.description || ''}</p>
+        <strong>Due date: ${formatDate(item.dueDate) || ''}</strong><br>
+        <strong>Priority: ${item.priority || ''}</strong><br>
+        <a class='btn btn-danger' href='?delete=${utf8ToB64(taskString)}&group=${task.group}' >delete</a>`;
+        cardBody.appendChild(createModal({ callToAction: 'View Task', id: `task${item.title}${index}`, modalBody: cardBody.innerHTML }));
+        const card = createElement('div', 'card', cardBody.outerHTML);
+        const listItem = createElement('div', 'col-3', card.outerHTML);
+        row.appendChild(listItem);
+      }
+    }
+  }
 
   container.appendChild(newGroup);
   container.appendChild(row);
