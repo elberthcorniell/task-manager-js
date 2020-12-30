@@ -1,6 +1,6 @@
 import Home from '../src/js/layout/home';
 
-describe('Navbar handler,', () => {
+describe('Home handler,', () => {
 
     document.body.innerHTML = `<div id="content"></div>`
     Home()
