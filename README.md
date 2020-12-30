@@ -56,6 +56,14 @@ Run the next on your terminal in the repository folder:
     npm run build
 ```
 
+### Testing
+
+Run the next on your terminal in the repository folder:
+
+```
+    npm test
+```
+
 
 ## Author
 

@@ -2,7 +2,11 @@ import { getAllTasks, getParam } from '../utils';
 
 export default class Task {
   constructor({
-    title, description, dueDate, priority, group = getParam('group'),
+    title,
+    description,
+    dueDate,
+    priority,
+    group = getParam('group'),
   }) {
     this.title = String(title);
     this.description = String(description);
